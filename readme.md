@@ -13,6 +13,8 @@ Here you can find the following points of what i have done in this project:
 - I wanted to add aop for logging parameters and return values, but it's still on my to do list.
 - The response errors are handled by an advice controller, and few Customized exception.
 - I added the incremenation of ids using a listener on the user model.
+- For the data model : The relation is a **User** has an **Account**. ***A one to one relation***
+- I put few mandatory fields with some constraints
 
 # Conditions && assumptions
 
