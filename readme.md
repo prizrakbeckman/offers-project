@@ -19,22 +19,27 @@ Here you can find the following points of what i have done in this project:
 
 - I assumed that to create an account, it's already existing in the database.
 - I chose to work with MongoTemplate because it allows me to manipulate the queries as i want.
+- I added the method to add new users to database, (<**/user/adduser** uri)
 
+# database information
+- Mongo compass is required or some some mongo db supported interface or server.
+- A creation of the database in mongo with the name : **_offerscurrentdb_**, and a **collection** named **_users_**
+- An account collection isn't required since we have an account per user.
 
 # Example of requests used for testing
 
-{
+`{
 "id":16,
-"userId":"haha",
-"fullName":"hahazbi",
+"userId":"user1",
+"fullName":"Jean Paul",
 "age":20,
-"localisation":"hahahaha",
+"localisation":"Paris",
 "account":{
-    "accountId":"haha",
-    "username":"hahazbi",
-    "email":"ahah@gmail.com",
-    "description":"hahaha"
+    "accountId":"account1",
+    "username":"user1",
+    "email":"user1@gmail.com",
+    "description":"utilisateur"
     }
-}
-
+}`
+`
 For testing creation of account based on age, change the field age to less than 18, to see validation error exception thrown
