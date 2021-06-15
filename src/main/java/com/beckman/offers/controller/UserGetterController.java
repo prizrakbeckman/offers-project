@@ -25,7 +25,6 @@ import java.util.function.Function;
 public class UserGetterController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserGetterController.class);
-    private static final String OK = "OK";
     private final UserGetterService userGetterService;
 
     public UserGetterController(UserGetterService userGetterService){
@@ -36,7 +35,7 @@ public class UserGetterController {
     @ResponseStatus(HttpStatus.OK)
     public User getUser(@PathVariable String username) throws UserNotFoundException {
         LOGGER.debug("Query on user : "+ username);
-        return Optional.of(this.userGetterService.findSingleByUserName(username)
+        return Optional.ofNullable(this.userGetterService.findSingleByUserName(username)
                 .join()).orElseThrow(()->new UserNotFoundException("No user found"));
     }
 

@@ -1,5 +1,6 @@
 package com.beckman.offers.service;
 
+import com.beckman.offers.exception.UserExistingInDatabaseException;
 import com.beckman.offers.exception.UserNotFoundException;
 import com.beckman.offers.model.Account;
 import com.beckman.offers.model.User;
@@ -10,12 +11,17 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UserAdderService {
+
+    private static final String USER_ID = "userId";
+    private static final String ACCOUNT = "account";
 
     private final MongoTemplate mongoTemplate;
 
@@ -30,17 +36,26 @@ public class UserAdderService {
 
     public CompletableFuture<DeleteResult> removeUser(User user) {
         Query query = new Query()
-                .addCriteria(Criteria.where("userId").is(user.getUserId()));
+                .addCriteria(Criteria.where(USER_ID).is(user.getUserId()));
         return CompletableFuture.completedFuture(this.mongoTemplate.remove(query, User.class));
     }
 
-    public CompletableFuture<UpdateResult> updateUser(Account account) throws Exception{
+    public CompletableFuture<UpdateResult> updateUser(Account account) throws UserNotFoundException{
         Query query = new Query()
-                .addCriteria(Criteria.where("userId").is(account.getDateCreation()));
-        Update update = Update.update("account", account);
-        if(Objects.isNull(this.mongoTemplate.find(query, User.class)))
+                .addCriteria(Criteria.where(USER_ID).is(account.getUsername()));
+        Update update = Update.update(ACCOUNT, account);
+        List<User> results = this.mongoTemplate.find(query, User.class);
+        if(CollectionUtils.isEmpty(results))
             throw new UserNotFoundException("User not found exception");
         return CompletableFuture.completedFuture(this.mongoTemplate.updateMulti(query,
                 update, User.class));
+    }
+
+    public CompletableFuture<User> addUser(User user) throws UserExistingInDatabaseException{
+        Query query = new Query()
+                .addCriteria(Criteria.where(USER_ID).is(user.getUserId()));
+        if(Objects.nonNull(this.mongoTemplate.findOne(query,User.class)))
+            throw new UserExistingInDatabaseException("User exists in database");
+        return CompletableFuture.completedFuture(this.mongoTemplate.insert(user));
     }
 }

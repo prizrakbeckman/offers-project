@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -84,7 +85,6 @@ public class UserAdderControllerTest {
     private Account anAccount(){
         Account account = new Account();
         account.setAccountId("accoundId");
-        account.setDateCreation(LocalDate.now());
         account.setEmail("account@tt.com");
 
         return account;

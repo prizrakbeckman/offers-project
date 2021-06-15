@@ -1,5 +1,6 @@
 package com.beckman.offers.controller.advice;
 
+import com.beckman.offers.exception.UserExistingInDatabaseException;
 import com.beckman.offers.exception.UserNotFoundException;
 import com.beckman.offers.exception.response.ExceptionResponse;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,12 @@ class EndpointExceptionHandler extends ResponseEntityExceptionHandler
     {
         ExceptionResponse exceptionResponse= new ExceptionResponse(LocalDate.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(UserExistingInDatabaseException.class)
+    public final ResponseEntity<Object> handleUserExistInDatabaseException(UserExistingInDatabaseException ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse= new ExceptionResponse(LocalDate.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request)

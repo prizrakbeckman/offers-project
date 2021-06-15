@@ -17,3 +17,23 @@ Here you can find the following points of what i have done in this project.
 
 - I assumed that to create an account, it's already existing in the database.
 - I chose to work with MongoTemplate because i can manipulate the queries as i want.
+
+
+# Example of requests used for testing
+
+{
+"id":16,
+"userId":"haha",
+"fullName":"hahazbi",
+"age":20,
+"zbi":20,
+"localisation":"hahahaha",
+    "account":{
+"accountId":"haha",
+"username":"hahazbi",
+"email":"ahah@gmail.com",
+"description":"hahaha"
+    }
+}
+
+For testing creation of account based on age, change the field age to less than 18, to see validation error exception thrown
