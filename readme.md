@@ -26,13 +26,12 @@ Here you can find the following points of what i have done in this project.
 "userId":"haha",
 "fullName":"hahazbi",
 "age":20,
-"zbi":20,
 "localisation":"hahahaha",
-    "account":{
-"accountId":"haha",
-"username":"hahazbi",
-"email":"ahah@gmail.com",
-"description":"hahaha"
+"account":{
+    "accountId":"haha",
+    "username":"hahazbi",
+    "email":"ahah@gmail.com",
+    "description":"hahaha"
     }
 }
 
