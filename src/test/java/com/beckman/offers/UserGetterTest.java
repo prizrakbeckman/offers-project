@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 public class UserGetterTest {
 
+    public static final String USERNAME_MOCK = "nazywam";
+
     @Mock
     private UserGetterService userGetterService;
     @Mock
@@ -40,20 +42,20 @@ public class UserGetterTest {
 
     @Test
     void shouldReturnAUserWhenUsernameIsNaziwam(){
-        assertNotNull(this.userGetterService.findSingleByUserName("nazywam"));
+        assertNotNull(this.userGetterService.findSingleByUserName(USERNAME_MOCK));
     }
 
     @Test
     void shouldThrowUserNotFoundExceptionWhenUserNotFound(){
         assertThrows(UserNotFoundException.class, () -> {
-            this.userGetterService.findSingleByUserName("nazywam");
+            this.userGetterService.findSingleByUserName(USERNAME_MOCK);
         });
     }
 
     private User aUser(long userCount, int age){
         User user = new User();
         user.setId(userCount);
-        user.setUserId("Naziwam");
+        user.setUserId(USERNAME_MOCK);
         user.setAccount( new Account());
         user.setAge(age);
         user.setId(userCount);
