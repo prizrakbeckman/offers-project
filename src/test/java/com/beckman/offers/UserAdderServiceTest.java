@@ -5,7 +5,6 @@ import com.beckman.offers.model.Account;
 import com.beckman.offers.model.User;
 import com.beckman.offers.service.UserAdderService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,12 +29,12 @@ class UserAdderServiceTest {
     }
 
     @Test
-    public void shouldInsertAccountWhenUserOver18(){
+    void shouldInsertAccountWhenUserOver18(){
         assertNotNull(this.userAdderService.insertUser(aUser(1L,18)));
     }
 
     @Test
-    public void shouldThrowExceptiontWhenUserlessThanEighteen(){
+    void shouldThrowExceptiontWhenUserlessThanEighteen(){
 
         assertThrows(UserUnderEigtheenException.class, () ->{
             this.userAdderService.insertUser(aUser(2L,17));
