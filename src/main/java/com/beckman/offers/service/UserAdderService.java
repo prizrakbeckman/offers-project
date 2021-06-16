@@ -28,18 +28,20 @@ public class UserAdderService {
     public UserAdderService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
-
+	
+	@Async
     public CompletableFuture<User> insertUser(User user) {
         return CompletableFuture.supplyAsync(() -> this.mongoTemplate.insert(user));
     }
 
-
+	@Async
     public CompletableFuture<DeleteResult> removeUser(User user) {
         Query query = new Query()
                 .addCriteria(Criteria.where(USER_ID).is(user.getUserId()));
         return CompletableFuture.completedFuture(this.mongoTemplate.remove(query, User.class));
     }
-
+	
+	@Async
     public CompletableFuture<UpdateResult> updateUser(Account account) throws UserNotFoundException{
         Query query = new Query()
                 .addCriteria(Criteria.where(USER_ID).is(account.getUsername()));
@@ -50,7 +52,8 @@ public class UserAdderService {
         return CompletableFuture.completedFuture(this.mongoTemplate.updateMulti(query,
                 update, User.class));
     }
-
+	
+	@Async
     public CompletableFuture<User> addUser(User user) throws UserExistingInDatabaseException{
         Query query = new Query()
                 .addCriteria(Criteria.where(USER_ID).is(user.getUserId()));

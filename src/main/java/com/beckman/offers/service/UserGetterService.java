@@ -18,11 +18,13 @@ public class UserGetterService {
     public UserGetterService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
-
+	
+	@Async
     public CompletableFuture<List<User>> findAll() {
         return CompletableFuture.completedFuture(this.mongoTemplate.findAll(User.class));
     }
-
+	
+	@Async
     public CompletableFuture<User> findSingleByUserName(String username) {
         Query query = new Query()
                 .addCriteria(Criteria.where("username").is(username));
