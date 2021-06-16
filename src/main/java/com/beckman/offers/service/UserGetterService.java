@@ -5,6 +5,7 @@ import com.beckman.offers.model.User;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +19,13 @@ public class UserGetterService {
     public UserGetterService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
-	
-	@Async
+
+    @Async
     public CompletableFuture<List<User>> findAll() {
         return CompletableFuture.completedFuture(this.mongoTemplate.findAll(User.class));
     }
-	
-	@Async
+
+    @Async
     public CompletableFuture<User> findSingleByUserName(String username) {
         Query query = new Query()
                 .addCriteria(Criteria.where("username").is(username));

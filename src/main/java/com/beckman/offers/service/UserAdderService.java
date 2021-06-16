@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -28,7 +29,7 @@ public class UserAdderService {
     public UserAdderService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
-	
+
 	@Async
     public CompletableFuture<User> insertUser(User user) {
         return CompletableFuture.supplyAsync(() -> this.mongoTemplate.insert(user));
@@ -40,7 +41,7 @@ public class UserAdderService {
                 .addCriteria(Criteria.where(USER_ID).is(user.getUserId()));
         return CompletableFuture.completedFuture(this.mongoTemplate.remove(query, User.class));
     }
-	
+
 	@Async
     public CompletableFuture<UpdateResult> updateUser(Account account) throws UserNotFoundException{
         Query query = new Query()
@@ -52,7 +53,7 @@ public class UserAdderService {
         return CompletableFuture.completedFuture(this.mongoTemplate.updateMulti(query,
                 update, User.class));
     }
-	
+
 	@Async
     public CompletableFuture<User> addUser(User user) throws UserExistingInDatabaseException{
         Query query = new Query()
