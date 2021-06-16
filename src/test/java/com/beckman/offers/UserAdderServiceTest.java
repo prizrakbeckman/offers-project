@@ -3,18 +3,20 @@ package com.beckman.offers;
 import com.beckman.offers.exception.UserUnderEigtheenException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import com.beckman.offers.model.Account;
 import com.beckman.offers.model.User;
 import com.beckman.offers.service.UserAdderService;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-public class UserAdderServiceTest {
+class UserAdderServiceTest {
 
     @Mock
     private UserAdderService userAdderService;
