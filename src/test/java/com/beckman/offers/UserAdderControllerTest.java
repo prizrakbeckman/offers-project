@@ -12,7 +12,9 @@ import com.beckman.offers.model.User;
 import com.beckman.offers.service.UserAdderService;
 import com.beckman.offers.service.UserGetterService;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,19 +30,18 @@ public class UserAdderControllerTest {
 
     private UserAdderController userAdderController;
 
-    @Mock
+    @InjectMocks
     private UserGetterService userGetterService;
 
-    @Mock
+    @InjectMocks
     private UserAdderService userAdderService;
 
-    @Mock
+    @InjectMocks
     private MongoTemplate mongoTemplate;
 
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
-        this.userAdderController = new UserAdderController(this.userAdderService);
         AtomicLong count = new AtomicLong(1);
         AtomicInteger age = new AtomicInteger(19);
         this.userAdderService.insertUser(aUser(count.get(), age.get()));

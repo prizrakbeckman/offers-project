@@ -28,7 +28,7 @@ public class UserGetterService {
     @Async
     public CompletableFuture<User> findSingleByUserName(String username) {
         Query query = new Query()
-                .addCriteria(Criteria.where("username").is(username));
+                .addCriteria(Criteria.where("userId").is(username));
         return CompletableFuture.supplyAsync(() -> this.mongoTemplate.findOne(query, User.class));
     }
 

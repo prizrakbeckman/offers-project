@@ -8,7 +8,7 @@ import com.beckman.offers.service.UserGetterService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
+import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -23,15 +23,15 @@ public class UserGetterTest {
 
     public static final String USERNAME_MOCK = "nazywam";
 
-    @Mock
     private UserGetterService userGetterService;
-    @Mock
     private UserAdderService userAdderService;
-    @Mock
+    @InjectMocks
     private MongoTemplate mongoTemplate;
 
     @BeforeAll
-    void setUp(){
+    public void setUp(){
+        this.userGetterService = new UserGetterService(this.mongoTemplate);
+        this.userAdderService = new UserAdderService(this.mongoTemplate);
         AtomicLong count = new AtomicLong(1);
         AtomicInteger age = new AtomicInteger(19);
         this.userAdderService.insertUser(aUser(count.get(),age.get()));
