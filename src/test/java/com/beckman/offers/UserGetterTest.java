@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-public class UserGetterTest {
+class UserGetterTest {
 
     public static final String USERNAME_MOCK = "nazywam";
 

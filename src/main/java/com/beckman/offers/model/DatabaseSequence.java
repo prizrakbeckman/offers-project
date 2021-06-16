@@ -11,7 +11,7 @@ public class DatabaseSequence {
 
     private long seq;
 
-    public DatabaseSequence() {
+    private DatabaseSequence() {
     }
 
     public String getId() {
