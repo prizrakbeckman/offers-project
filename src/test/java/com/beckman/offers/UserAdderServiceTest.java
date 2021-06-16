@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(MockitoExtension.class)
 public class UserAdderServiceTest {
 
     @Mock
